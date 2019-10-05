@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
+    public Transform inner;
+
     public int damage = 2;
     public float attackTime = 1.0f;
     public float agrRange = 30.0f;
@@ -38,6 +40,8 @@ public class Enemy : MonoBehaviour {
         else {
             cachedNavMeshAgent.SetDestination(target.transform.position);
             cachedNavMeshAgent.isStopped = false;
+            if (cachedNavMeshAgent.velocity.magnitude > 0.01f)
+                inner.rotation = Quaternion.LookRotation(cachedNavMeshAgent.velocity.normalized);
         }
 
     }

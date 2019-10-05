@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9a1f3bf67416543a7a11344c202259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inner: {fileID: 2217398440498665418}
   damage: 1
   attackTime: 0.2
   agrRange: 30
@@ -84,11 +85,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 8759025497378951461, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c583086bc7a0af4899239236fb34cc6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 128a85f13c6f4ae41b22a07d7b3978fb, type: 3}
 --- !u!1 &6611672826791949813 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4560629804166986033, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7245163440076475588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2217398440498665418 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8813040761328786190, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
     type: 3}
   m_PrefabInstance: {fileID: 7245163440076475588}
   m_PrefabAsset: {fileID: 0}

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473b070c6847a62459a432ad2ec3d9bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inner: {fileID: 7414174777125980270}
+  damage: 2
   speed: 15
   maxDistance: 15
 --- !u!1001 &8415635605913906048
@@ -51,6 +53,12 @@ PrefabInstance:
 --- !u!1 &2585305777676069457 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6280988858205405649, guid: c73c72a301166eb4b9d4589046a9e67c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8415635605913906048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7414174777125980270 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1310027780739687406, guid: c73c72a301166eb4b9d4589046a9e67c,
     type: 3}
   m_PrefabInstance: {fileID: 8415635605913906048}
   m_PrefabAsset: {fileID: 0}

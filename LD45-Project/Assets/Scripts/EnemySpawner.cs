@@ -14,8 +14,6 @@ public class EnemySpawner : MonoBehaviour {
     private float timer = -1.0f;
 
     private void Update() {
-        //timer -= Time.deltaTime;
-        
         if (timer < 0.0f) {
             for (int i = 0; i < numberOfEnemies; ++i) {
                 float angle = Random.Range(0, 2.0f * Mathf.PI);

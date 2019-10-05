@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 public class Player : MonoBehaviour {
+    [Header("Attack")]
+    public int damage = 2;
+    public float attackTime = 1.0f;
+    public float attackRange = 1.0f;
+    private float attackTimer = -1.0f;
+
     [Header("Movement")]
     public Transform inner;
     public float normalSpeed = 10.0f;
@@ -22,13 +28,34 @@ public class Player : MonoBehaviour {
     private List<GameObject> playerCopies = new List<GameObject>();
 
     private void Update() {
+        attackTimer -= Time.deltaTime;
+
         float speed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? fastSpeed : normalSpeed;
         Vector3 forward = new Vector3(0.5f, 0.0f, 0.5f);
         Vector3 right = new Vector3(0.5f, 0.0f, -0.5f);
         if (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal")) > 0.01f) {
             Vector3 dir = (Input.GetAxis("Vertical") * forward + Input.GetAxis("Horizontal") * right).normalized;
             transform.position += dir * Time.deltaTime * speed;
-            inner.forward = dir;
+        }
+
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Debug.DrawRay(ray.origin, ray.direction * 100.0f, Color.red);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground"))) {
+            inner.forward = (hit.point - transform.position).normalized;
+            inner.forward = new Vector3(inner.forward.x, 0.0f, inner.forward.z);
+        }
+        
+        if (Input.GetMouseButton(0) && attackTimer < 0.0f) {
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var go in gameObjects) {
+                float distance = Vector3.Distance(go.transform.position, transform.position);
+                if (distance < attackRange) {
+                    CharachterState state = go.GetComponentInParent<CharachterState>();
+                    state.hp -= damage;
+                }
+            }
+            attackTimer = attackTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))

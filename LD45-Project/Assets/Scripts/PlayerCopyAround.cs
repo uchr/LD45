@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class PlayerCopyAround : MonoBehaviour {
+    public Transform inner;
+
     public int damage = 1;
     public float attackTime = 1.0f;
     public float agrRange = 20.0f;
@@ -39,13 +41,14 @@ public class PlayerCopyAround : MonoBehaviour {
 
         if (minDistance > agrRange) {
             target = null;
-            if (!cachedNavMeshAgent.SetDestination(player.transform.position + relativePosition))
-                Debug.Log("Bad path");
+            cachedNavMeshAgent.SetDestination(player.transform.position + relativePosition);
         }
         else {
-            if (!cachedNavMeshAgent.SetDestination(target.transform.position))
-                Debug.Log("Bad path");
+            cachedNavMeshAgent.SetDestination(target.transform.position);
         }
+
+        if (cachedNavMeshAgent.velocity.magnitude > 0.01f)
+            inner.rotation = Quaternion.LookRotation(cachedNavMeshAgent.velocity.normalized);
     }
 
     private void OnCollisionStay(Collision collision) {

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class PlayerCopyForward : MonoBehaviour {
+    public Transform inner;
     public int damage = 2;
     public float speed = 15.0f;
     public float maxDistance = 5.0f;
@@ -18,6 +19,7 @@ public class PlayerCopyForward : MonoBehaviour {
         GetComponent<NavMeshAgent>().enabled = false;
 
         dir = player.GetComponent<Player>().inner.forward;
+        inner.forward = dir;
         initPosition = transform.position;
     }
 
