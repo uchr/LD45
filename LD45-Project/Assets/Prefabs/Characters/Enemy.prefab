@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9a1f3bf67416543a7a11344c202259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravePrefab: {fileID: 5350094746179886330, guid: 7485d6139c42b17428276789da094b4c,
+    type: 3}
   inner: {fileID: 2217398440498665418}
   damage: 1
   attackTime: 0.2
