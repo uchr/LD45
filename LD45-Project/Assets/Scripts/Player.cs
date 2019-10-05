@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class Player : MonoBehaviour {
     [Header("Movement")]
     public Transform inner;
@@ -9,11 +9,13 @@ public class Player : MonoBehaviour {
     public float fastSpeed = 20.0f;
     
     [Header("Around Copies")]
+    public float aroundCooldown = 2.0f;
     public int aroundNumber = 10;
     public GameObject aroundPrefab;
     public float boxSize = 2.0f;
 
     [Header("Forward Copies")]
+    public float forwardCooldown = 1.0f;
     public int forwardNumber = 5;
     public GameObject forwardPrefab;
 
@@ -44,13 +46,17 @@ public class Player : MonoBehaviour {
     }
 
     private void SpawnPlayerCopiesAround() {
-        foreach (var go in playerCopies)
-            Destroy(go);
+        //foreach (var go in playerCopies)
+        //    Destroy(go);
 
-        playerCopies.Clear();
+        //playerCopies.Clear();
         for (int i = 0; i < aroundNumber; ++i) {
             Vector3 copyPosition = Random.Range(-boxSize, boxSize) * Vector3.right + Random.Range(-boxSize, boxSize) * Vector3.forward;
-            playerCopies.Add(Instantiate(aroundPrefab, transform.position + copyPosition, Quaternion.identity));
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(transform.position + copyPosition, out hit, 1.0f, NavMesh.AllAreas))
+                playerCopies.Add(Instantiate(aroundPrefab, transform.position + copyPosition, Quaternion.identity));
+            else 
+                --i;
         }
     }
 }

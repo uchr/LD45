@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class PlayerCopyForward : MonoBehaviour {
+    public int damage = 2;
     public float speed = 15.0f;
     public float maxDistance = 5.0f;
 
@@ -24,5 +25,12 @@ public class PlayerCopyForward : MonoBehaviour {
         transform.position += dir * speed * Time.deltaTime;
         if (Vector3.Distance(transform.position, initPosition) > maxDistance)
             Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.tag == "Enemy") {
+            CharachterState state = collision.gameObject.GetComponentInParent<CharachterState>();
+            state.hp -= damage;
+        }
     }
 }

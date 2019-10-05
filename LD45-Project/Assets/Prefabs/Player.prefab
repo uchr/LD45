@@ -18,7 +18,7 @@ MonoBehaviour:
   aroundNumber: 10
   aroundPrefab: {fileID: 7242947614161028885, guid: 88b92218f6ba5c94288021ec2e1a22dc,
     type: 3}
-  boxSize: 5
+  boxSize: 7.5
   forwardNumber: 5
   forwardPrefab: {fileID: 2585305777676069457, guid: 42c7d9e81d9bb714e9ec218c68b18829,
     type: 3}
@@ -38,6 +38,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560629804166986033, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4560629804166986034, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
         type: 3}

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde58f42df552c4489efe19abf447f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 2
+  attackTime: 0.2
+  agrRange: 5
 --- !u!1001 &3724072736877823684
 PrefabInstance:
   m_ObjectHideFlags: 0
