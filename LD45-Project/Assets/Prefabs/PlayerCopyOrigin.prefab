@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &273375380862756803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6280988858205405649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e818d8e8fbf5cc4180af19493ca2eb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!195 &1402000721453261716
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -44,7 +32,7 @@ PrefabInstance:
     - target: {fileID: 4560629804166986033, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
         type: 3}
       propertyPath: m_Name
-      value: PlayerCopy Variant
+      value: PlayerCopyOrigin
       objectReference: {fileID: 0}
     - target: {fileID: 4560629804166986033, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
         type: 3}

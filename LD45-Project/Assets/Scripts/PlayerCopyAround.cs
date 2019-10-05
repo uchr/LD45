@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerCopy : MonoBehaviour {
-    private GameObject player;
-
-    private Vector3 prevPlayerPosition;
+public class PlayerCopyAround : MonoBehaviour {
     private Vector3 relativePosition;
-
+    
     private NavMeshAgent cachedNavMeshAgent;
+    
+    private GameObject player;
 
     private void Awake() {
         player = GameObject.Find("@Player");
-        relativePosition = transform.position - player.transform.position;
         cachedNavMeshAgent = GetComponent<NavMeshAgent>();
+
+        relativePosition = transform.position - player.transform.position;
     }
 
     private void Update() {
