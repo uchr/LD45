@@ -46,10 +46,6 @@ public class Player : MonoBehaviour {
     }
 
     private void SpawnPlayerCopiesAround() {
-        //foreach (var go in playerCopies)
-        //    Destroy(go);
-
-        //playerCopies.Clear();
         for (int i = 0; i < aroundNumber; ++i) {
             Vector3 copyPosition = Random.Range(-boxSize, boxSize) * Vector3.right + Random.Range(-boxSize, boxSize) * Vector3.forward;
             NavMeshHit hit;

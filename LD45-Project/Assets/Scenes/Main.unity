@@ -714,6 +714,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2669105070284139315, guid: 26a1dd90531dd0647a7d6b8917a38162,
+        type: 3}
+      propertyPath: numberOfEnemies
+      value: 160
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26a1dd90531dd0647a7d6b8917a38162, type: 3}
 --- !u!4 &31523617 stripped
@@ -2567,6 +2572,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2669105070284139315, guid: 26a1dd90531dd0647a7d6b8917a38162,
+        type: 3}
+      propertyPath: numberOfEnemies
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26a1dd90531dd0647a7d6b8917a38162, type: 3}
@@ -12338,6 +12348,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6021210349220198377, guid: 74f6aa7f603c0d446a9d8943aba13b94,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 34.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021210349220198377, guid: 74f6aa7f603c0d446a9d8943aba13b94,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.81
+      objectReference: {fileID: 0}
     - target: {fileID: 6021210349220198378, guid: 74f6aa7f603c0d446a9d8943aba13b94,
         type: 3}
       propertyPath: m_Name
@@ -17421,7 +17441,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: -13, y: 19, z: -13}
+  m_LocalPosition: {x: 21.91, y: 19, z: -14.809999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -29584,6 +29604,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2669105070284139315, guid: 26a1dd90531dd0647a7d6b8917a38162,
+        type: 3}
+      propertyPath: numberOfEnemies
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26a1dd90531dd0647a7d6b8917a38162, type: 3}
@@ -46601,7 +46626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942632838}
   m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: -13, y: 19, z: -13}
+  m_LocalPosition: {x: 21.91, y: 19, z: -14.809999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 792678929}
