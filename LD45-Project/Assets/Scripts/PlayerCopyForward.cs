@@ -33,6 +33,7 @@ public class PlayerCopyForward : MonoBehaviour {
         if (collision.gameObject.tag == "Enemy") {
             CharachterState state = collision.gameObject.GetComponentInParent<CharachterState>();
             state.hp -= damage;
+            Destroy(gameObject);
         }
     }
 }

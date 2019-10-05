@@ -109,6 +109,18 @@ public class Player : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E))
             SpawnPlayerCopiesForward();
+
+        if (Input.GetKey(KeyCode.Q)) {
+            CircleCopies();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q)) {
+            ReshuffleCopies();
+        }
+
+        if (Input.GetKeyUp(KeyCode.R)) {
+            ReshuffleCopies();
+        }
     }
 
     private void SpawnPlayerCopiesForward() {
@@ -138,6 +150,36 @@ public class Player : MonoBehaviour {
 
         playerCopies = liveCopies;
 
+        reshuffleTimer = reshuffleTime;
+    }
+
+    private void CircleCopies() {
+        List<GameObject> liveCopies = new List<GameObject>();
+        for (int i = 0; i < playerCopies.Count; ++i) {
+            if (playerCopies[i] == null)
+                continue;
+            liveCopies.Add(playerCopies[i]);
+        }
+        playerCopies = liveCopies;
+        for (int i = 0; i < playerCopies.Count; ++i) {
+            float angle = i *  2.0f * Mathf.PI / playerCopies.Count;
+            playerCopies[i].GetComponent<PlayerCopyAround>().relativePosition = new Vector3(hordeRadious * Mathf.Cos(angle), 0.0f, hordeRadious * Mathf.Sin(angle));
+        }
+        reshuffleTimer = reshuffleTime;
+    }
+
+    private void WedgeCopies() {
+        List<GameObject> liveCopies = new List<GameObject>();
+        for (int i = 0; i < playerCopies.Count; ++i) {
+            if (playerCopies[i] == null)
+                continue;
+            liveCopies.Add(playerCopies[i]);
+        }
+        playerCopies = liveCopies;
+        for (int i = 0; i < playerCopies.Count; ++i) {
+            float angle = i * 2.0f * Mathf.PI / playerCopies.Count;
+            playerCopies[i].GetComponent<PlayerCopyAround>().relativePosition = new Vector3(hordeRadious * Mathf.Cos(angle), 0.0f, hordeRadious * Mathf.Sin(angle));
+        }
         reshuffleTimer = reshuffleTime;
     }
 }

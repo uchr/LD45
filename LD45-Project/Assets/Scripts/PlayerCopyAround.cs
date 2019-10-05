@@ -36,15 +36,16 @@ public class PlayerCopyAround : MonoBehaviour {
         timer -= Time.deltaTime;
 
         bool targetFound= false;
+        bool disable = true;
         GameObject targetEnemy = Utils.ClosestObjectByTag("Enemy", transform.position, agressionRange);
-        if (targetEnemy) {
+        if (targetEnemy && !disable) {
             cachedNavMeshAgent.SetDestination(targetEnemy.transform.position);
             Debug.DrawLine(transform.position, targetEnemy.transform.position, Color.cyan);
             targetFound = true;
             debugState = "enemy";
         }
 
-        if (!targetFound && !hasMoney) {
+        if (!targetFound && !hasMoney && !disable) {
             GameObject targetMoney = Utils.ClosestObjectByTag("Money", transform.position, moneyRange);
             if (targetMoney) {
                 cachedNavMeshAgent.SetDestination(targetMoney.transform.position);
@@ -60,7 +61,7 @@ public class PlayerCopyAround : MonoBehaviour {
             }
         }
 
-        if (!targetFound && hasMoney) {
+        if (!targetFound && hasMoney && !disable) {
             if (Vector3.Distance(home.transform.position, transform.position) < moneyRange) {
                 Debug.DrawLine(transform.position, home.transform.position, Color.cyan);
                 cachedNavMeshAgent.SetDestination(home.transform.position);
