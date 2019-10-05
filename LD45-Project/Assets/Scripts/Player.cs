@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 public class Player : MonoBehaviour {
+    [Header("State")]
+    public int money = 0;
+
     [Header("Attack")]
     public int damage = 2;
     public float attackTime = 1.0f;
