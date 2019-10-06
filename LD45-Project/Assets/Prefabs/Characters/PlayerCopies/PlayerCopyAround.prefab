@@ -49,6 +49,11 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 1402000721453261716, guid: c73c72a301166eb4b9d4589046a9e67c,
+        type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1659317481179619533, guid: c73c72a301166eb4b9d4589046a9e67c,
         type: 3}
       propertyPath: hp

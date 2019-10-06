@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour {
 
         if (collision.gameObject.tag == "Player") {
             CharachterState state = collision.gameObject.GetComponentInParent<CharachterState>();
+            cachedAnimatorController.SetTrigger("Attack");
             state.hp -= damage;
             timer = attackTime;
         }

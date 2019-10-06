@@ -90,6 +90,7 @@ public class PlayerCopyAround : MonoBehaviour {
                     if (Vector3.Distance(targetPositon, transform.position) < 2.0f) {
                         if (timer > 0.0f)
                             return;
+                        cachedAnimatorController.SetTrigger("HouseAttack");
                         --targetHouse.GetComponent<House>().hp;
                         timer = attackTime;
                         //Destroy(gameObject);
@@ -128,6 +129,7 @@ public class PlayerCopyAround : MonoBehaviour {
             return;
 
         if (attackEnemy && collision.gameObject.tag == "Enemy") {
+            cachedAnimatorController.SetTrigger("Attack");
             CharachterState state = collision.gameObject.GetComponentInParent<CharachterState>();
             state.hp -= damage;
             timer = attackTime;

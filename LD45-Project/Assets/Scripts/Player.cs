@@ -96,8 +96,8 @@ public class Player : MonoBehaviour {
             ReshuffleCopies();
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-            SpawnPlayerCopiesAround();
+        //if (Input.GetKeyDown(KeyCode.E))
+        //    SpawnPlayerCopiesAround();
 
         if (resurrectionMode && resurrectionTimer > resurrectionTime) {
             GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Grave");
@@ -123,7 +123,8 @@ public class Player : MonoBehaviour {
         hpPercent = (float) GetComponent<CharachterState>().hp / initHP;
 
         if (!makingSomeMagick) {
-            float speed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? fastSpeed : normalSpeed;
+            //float speed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? fastSpeed : normalSpeed;
+            float speed = normalSpeed;
             Vector3 forward = new Vector3(0.5f, 0.0f, 0.5f);
             Vector3 right = new Vector3(0.5f, 0.0f, -0.5f);
             float velocity = Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"));
