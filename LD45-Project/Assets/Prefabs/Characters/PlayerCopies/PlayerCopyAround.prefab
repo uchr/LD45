@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inner: {fileID: 2794757077254274138}
-  canAttack: 0
+  attackHouse: 0
+  attackEnemy: 0
   damage: 1
   attackTime: 0.5
   agressionRange: 7.5
-  housesRange: 20
+  housesRange: 15
+  playerRange: 15
   relativePosition: {x: 0, y: 0, z: 0}
   debugState: 
 --- !u!1001 &3724072736877823684
@@ -50,7 +52,7 @@ PrefabInstance:
     - target: {fileID: 1659317481179619533, guid: c73c72a301166eb4b9d4589046a9e67c,
         type: 3}
       propertyPath: hp
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6280988858205405650, guid: c73c72a301166eb4b9d4589046a9e67c,
         type: 3}
@@ -71,6 +73,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6280988858939893940, guid: c73c72a301166eb4b9d4589046a9e67c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c73c72a301166eb4b9d4589046a9e67c, type: 3}

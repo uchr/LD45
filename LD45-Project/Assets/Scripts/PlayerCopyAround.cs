@@ -6,11 +6,13 @@ using UnityEngine.AI;
 public class PlayerCopyAround : MonoBehaviour {
     public Transform inner;
 
-    public bool canAttack = false;
+    public bool attackHouse = false;
+    public bool attackEnemy = false;
     public int damage = 1;
     public float attackTime = 1.0f;
     public float agressionRange = 10.0f;
     public float housesRange = 30.0f;
+    public float playerRange = 15.0f;
 
     public Vector3 relativePosition;
 
@@ -38,46 +40,64 @@ public class PlayerCopyAround : MonoBehaviour {
         timer -= Time.deltaTime;
 
         bool targetFound= false;
-        GameObject targetEnemy = Utils.ClosestObjectByTag("Enemy", player.transform.position, agressionRange);
-        if (targetEnemy && canAttack) {
-            cachedNavMeshAgent.SetDestination(targetEnemy.transform.position);
-            Debug.DrawLine(transform.position, targetEnemy.transform.position, Color.cyan);
-            targetFound = true;
-            debugState = "enemy";
-        }
 
-        if (!targetFound && canAttack) {
-            GameObject targetHouse = null;
+        if (attackHouse) {
+            //GameObject targetEnemy = null;
+            //GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
+            //float minDistance = float.PositiveInfinity;
+            //foreach (var go in gameObjects) {
+            //    float distance = Vector3.Distance(go.transform.position, player.transform.position + relativePosition);
+            //    float distanceToPlayer = Vector3.Distance(go.transform.position, player.transform.position);
+            //    if (distance < minDistance && distance < agressionRange && distanceToPlayer < playerRange) {
+            //        minDistance = distance;
+            //        targetEnemy = go;
+            //    }
+            //}
+            //if (targetEnemy) {
+            //    cachedNavMeshAgent.SetDestination(targetEnemy.transform.position);
+            //    Debug.DrawLine(transform.position, targetEnemy.transform.position, Color.cyan);
+            //    targetFound = true;
+            //    debugState = "enemy";
+            //}
 
-            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("House");
-            float minDistance = float.PositiveInfinity;
-            foreach (var go in gameObjects) {
-                float distance = Vector3.Distance(go.GetComponent<House>().spawnPoint.transform.position, player.transform.position);
-                if (distance < minDistance && distance < housesRange && go.GetComponent<House>().hp > 0) {
-                    minDistance = distance;
-                    targetHouse = go;
-                }
-            }
+            if (!targetFound) {
+                GameObject targetHouse = null;
 
-            if (targetHouse) {
-                Vector3 targetPositon = targetHouse.GetComponent<House>().spawnPoint.transform.position;
-                NavMeshHit hit;
-                if (!NavMesh.SamplePosition(targetPositon, out hit, 2.0f, NavMesh.AllAreas)) {
-                    cachedNavMeshAgent.SetDestination(targetPositon);
-                    Debug.DrawLine(transform.position, targetPositon, Color.cyan);
-                }
-                else {
-                    cachedNavMeshAgent.SetDestination(hit.position);
-                    Debug.DrawLine(transform.position, hit.position, Color.cyan);
-                }
-
-                if (Vector3.Distance(targetPositon, transform.position) < 2.0f) {
-                    --targetHouse.GetComponent<House>().hp;
-                    //Destroy(gameObject);
+                GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("House");
+                float minDistance = float.PositiveInfinity;
+                foreach (var go in gameObjects) {
+                    Vector3 houseDoorPoint = go.GetComponent<House>().spawnPoint.transform.position;
+                    float distance = Vector3.Distance(houseDoorPoint, player.transform.position + relativePosition);
+                    float distanceToPlayer = Vector3.Distance(houseDoorPoint, player.transform.position);
+                    if (distance < minDistance && distance < housesRange && distanceToPlayer < playerRange && go.GetComponent<House>().hp > 0) {
+                        minDistance = distance;
+                        targetHouse = go;
+                    }
                 }
 
-                targetFound = true;
-                debugState = "house";
+                if (targetHouse) {
+                    Vector3 targetPositon = targetHouse.GetComponent<House>().spawnPoint.transform.position;
+                    NavMeshHit hit;
+                    if (!NavMesh.SamplePosition(targetPositon, out hit, 2.0f, NavMesh.AllAreas)) {
+                        cachedNavMeshAgent.SetDestination(targetPositon);
+                        Debug.DrawLine(transform.position, targetPositon, Color.cyan);
+                    }
+                    else {
+                        cachedNavMeshAgent.SetDestination(hit.position);
+                        Debug.DrawLine(transform.position, hit.position, Color.cyan);
+                    }
+
+                    if (Vector3.Distance(targetPositon, transform.position) < 2.0f) {
+                        if (timer > 0.0f)
+                            return;
+                        --targetHouse.GetComponent<House>().hp;
+                        timer = attackTime;
+                        //Destroy(gameObject);
+                    }
+
+                    targetFound = true;
+                    debugState = "house";
+                }
             }
         }
 
@@ -107,7 +127,7 @@ public class PlayerCopyAround : MonoBehaviour {
         if (timer > 0.0f)
             return;
 
-        if (collision.gameObject.tag == "Enemy") {
+        if (attackEnemy && collision.gameObject.tag == "Enemy") {
             CharachterState state = collision.gameObject.GetComponentInParent<CharachterState>();
             state.hp -= damage;
             timer = attackTime;

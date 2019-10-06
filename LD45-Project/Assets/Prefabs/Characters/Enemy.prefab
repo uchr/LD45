@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inner: {fileID: 1841277202564533946}
   damage: 1
-  attackTime: 0.5
+  attackTime: 0.4
   agressionRange: 20
 --- !u!195 &6355410038191246534
 NavMeshAgent:
@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: -43058218365806547, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
         type: 3}
       propertyPath: hp
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4560629804166986034, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
         type: 3}
@@ -90,6 +90,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 4560629803700965460, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 353304912735356826, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -99,7 +104,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4c583086bc7a0af4899239236fb34cc6, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 128a85f13c6f4ae41b22a07d7b3978fb, type: 3}
 --- !u!1 &6611672826791949813 stripped

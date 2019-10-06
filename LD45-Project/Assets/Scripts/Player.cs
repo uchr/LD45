@@ -67,7 +67,7 @@ public class Player : MonoBehaviour {
 
         cachedAnimatorController.SetBool("HordeAttack", Input.GetMouseButton(0));
         if (Input.GetMouseButton(0)) {
-            Attack(true);
+            Attack(true, false);
             makingSomeMagick = true;
         }
         else {
@@ -77,12 +77,13 @@ public class Player : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonUp(0)) {
-            Attack(false);
+            Attack(false, false);
         }
 
         cachedAnimatorController.SetBool("CircleAttack", Input.GetMouseButton(1));
         if (Input.GetMouseButton(1)) {
             CircleCopies();
+            Attack(false, true);
             makingSomeMagick = true;
         }
         else {
@@ -90,8 +91,10 @@ public class Player : MonoBehaviour {
                 GameObject.Find("@Tutorial").GetComponent<Tutorial>().ResetTimer();
             }
         }
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1)) {
+            Attack(false, false);
             ReshuffleCopies();
+        }
 
         if (Input.GetKeyDown(KeyCode.E))
             SpawnPlayerCopiesAround();
@@ -106,7 +109,7 @@ public class Player : MonoBehaviour {
                 }
             }
             if (GameObject.Find("@Tutorial").GetComponent<Tutorial>().stage == 0) {
-                transform.position = new Vector3(-15, 0, -54);
+                transform.position = new Vector3(-29.37f, 1.0f, -77.24f);
                 SpawnPlayerCopiesAround();
                 GameObject.Find("@Tutorial").GetComponent<Tutorial>().NextStage();
             }
@@ -185,7 +188,7 @@ public class Player : MonoBehaviour {
         reshuffleTimer = reshuffleTime;
     }
 
-    private void Attack(bool attack) {
+    private void Attack(bool attackHouse, bool attackEnemy) {
         List<GameObject> liveCopies = new List<GameObject>();
         for (int i = 0; i < playerCopies.Count; ++i) {
             if (playerCopies[i] == null)
@@ -195,7 +198,8 @@ public class Player : MonoBehaviour {
 
         playerCopies = liveCopies;
         for (int i = 0; i < playerCopies.Count; ++i) {
-            playerCopies[i].GetComponent<PlayerCopyAround>().canAttack = attack;
+            playerCopies[i].GetComponent<PlayerCopyAround>().attackHouse = attackHouse;
+            playerCopies[i].GetComponent<PlayerCopyAround>().attackEnemy = attackEnemy;
         }
 
         reshuffleTimer = reshuffleTime;
