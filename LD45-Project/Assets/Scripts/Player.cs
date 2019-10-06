@@ -18,6 +18,9 @@ public class Player : MonoBehaviour {
     public float resurrectionRange = 5.0f;
     public float resurrectionTime = 3.0f;
 
+    public GameObject castEffect;
+    public float resurrectionEffectSpeed = 10.0f;
+
     public int debugNumberOfCopies = 10;
 
     private bool resurrectionMode = false;
@@ -40,12 +43,26 @@ public class Player : MonoBehaviour {
         if (reshuffleTimer < 0.0f)
             ReshuffleCopies();
 
+        bool makingSomeMagick = false;
         if (Input.GetKeyDown(KeyCode.Space)) {
             resurrectionMode = true;
             resurrectionTimer = 0.0f;
         }
 
-        bool makingSomeMagick = false;
+        if (Input.GetKey(KeyCode.Space)) {
+            cachedAnimatorController.SetBool("Resurrection", true);
+            resurrectionTimer += Time.deltaTime;
+            castEffect.transform.localPosition += Time.deltaTime * resurrectionEffectSpeed * Vector3.up;
+            resurrectionMode = true;
+            makingSomeMagick = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            cachedAnimatorController.SetBool("Resurrection", false);
+            castEffect.transform.localPosition = 15 * Vector3.down;
+            resurrectionMode = false;
+        }
+
         cachedAnimatorController.SetBool("HordeAttack", Input.GetMouseButton(0));
         if (Input.GetMouseButton(0)) {
             Attack(true);
@@ -63,18 +80,6 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonUp(1))
             ReshuffleCopies();
 
-        if (Input.GetKey(KeyCode.Space)) {
-            cachedAnimatorController.SetBool("Resurrection", true);
-            resurrectionTimer += Time.deltaTime;
-            resurrectionMode = true;
-            makingSomeMagick = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space)) {
-            cachedAnimatorController.SetBool("Resurrection", false);
-            resurrectionMode = false;
-        }
-
         if (Input.GetKeyDown(KeyCode.E))
             SpawnPlayerCopiesAround();
 
@@ -88,6 +93,7 @@ public class Player : MonoBehaviour {
                 }
             }
             resurrectionMode = false;
+            castEffect.transform.localPosition = 15 * Vector3.down;
             cachedAnimatorController.SetBool("Resurrection", false);
             ReshuffleCopies();
         }
