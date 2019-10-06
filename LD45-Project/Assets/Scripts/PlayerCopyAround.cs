@@ -6,9 +6,10 @@ using UnityEngine.AI;
 public class PlayerCopyAround : MonoBehaviour {
     public Transform inner;
 
+    public bool canAttack = false;
     public int damage = 1;
     public float attackTime = 1.0f;
-    public float agressionRange = 7.5f;
+    public float agressionRange = 10.0f;
     public float moneyRange = 15.0f;
 
     public Vector3 relativePosition;
@@ -37,8 +38,8 @@ public class PlayerCopyAround : MonoBehaviour {
 
         bool targetFound= false;
         bool disable = true;
-        GameObject targetEnemy = Utils.ClosestObjectByTag("Enemy", transform.position, agressionRange);
-        if (targetEnemy && !disable) {
+        GameObject targetEnemy = Utils.ClosestObjectByTag("Enemy", player.transform.position, agressionRange);
+        if (targetEnemy && canAttack) {
             cachedNavMeshAgent.SetDestination(targetEnemy.transform.position);
             Debug.DrawLine(transform.position, targetEnemy.transform.position, Color.cyan);
             targetFound = true;
@@ -79,12 +80,14 @@ public class PlayerCopyAround : MonoBehaviour {
         if (!targetFound) {
             cachedNavMeshAgent.SetDestination(player.transform.position + relativePosition);
             Debug.DrawLine(transform.position, player.transform.position + relativePosition, Color.cyan);
-            targetFound = true;
             debugState = "player";
         }
 
-        if (cachedNavMeshAgent.velocity.magnitude > 0.01f)
-            inner.rotation = Quaternion.LookRotation(cachedNavMeshAgent.velocity.normalized);
+        if (cachedNavMeshAgent.velocity.magnitude > 0.01f) {
+            Vector3 dir = cachedNavMeshAgent.velocity;
+            dir.y = 0.0f;
+            inner.rotation = Quaternion.LookRotation(dir.normalized);
+        }
     }
 
     private void OnCollisionStay(Collision collision) {

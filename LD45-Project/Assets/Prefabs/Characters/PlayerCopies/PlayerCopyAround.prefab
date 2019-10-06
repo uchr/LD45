@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde58f42df552c4489efe19abf447f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inner: {fileID: 2414130882348590378}
+  inner: {fileID: 2794757077254274138}
   damage: 2
   attackTime: 0.2
-  agrRange: 7.5
+  agressionRange: 7.5
+  moneyRange: 15
   relativePosition: {x: 0, y: 0, z: 0}
+  hasMoney: 0
+  debugState: 
 --- !u!1001 &3724072736877823684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32,7 +35,17 @@ PrefabInstance:
     - target: {fileID: 1402000721453261716, guid: c73c72a301166eb4b9d4589046a9e67c,
         type: 3}
       propertyPath: m_Speed
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402000721453261716, guid: c73c72a301166eb4b9d4589046a9e67c,
+        type: 3}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402000721453261716, guid: c73c72a301166eb4b9d4589046a9e67c,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6280988858205405650, guid: c73c72a301166eb4b9d4589046a9e67c,
         type: 3}
@@ -62,9 +75,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3724072736877823684}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2414130882348590378 stripped
+--- !u!4 &2794757077254274138 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1310027780739687406, guid: c73c72a301166eb4b9d4589046a9e67c,
+  m_CorrespondingSourceObject: {fileID: 1542035016545876638, guid: c73c72a301166eb4b9d4589046a9e67c,
     type: 3}
   m_PrefabInstance: {fileID: 3724072736877823684}
   m_PrefabAsset: {fileID: 0}

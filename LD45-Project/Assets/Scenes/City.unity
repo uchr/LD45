@@ -113,8 +113,8 @@ NavMeshSettings:
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
-    manualCellSize: 0
-    cellSize: 0.16666667
+    manualCellSize: 1
+    cellSize: 0.08
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -18793,7 +18793,7 @@ PrefabInstance:
     - target: {fileID: 4573090296540153467, guid: 74f6aa7f603c0d446a9d8943aba13b94,
         type: 3}
       propertyPath: hordeRadious
-      value: 5
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 4573090296540153467, guid: 74f6aa7f603c0d446a9d8943aba13b94,
         type: 3}
@@ -18805,6 +18805,17 @@ PrefabInstance:
       propertyPath: inner
       value: 
       objectReference: {fileID: 922792926}
+    - target: {fileID: 4573090296540153467, guid: 74f6aa7f603c0d446a9d8943aba13b94,
+        type: 3}
+      propertyPath: normalSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573090296540153467, guid: 74f6aa7f603c0d446a9d8943aba13b94,
+        type: 3}
+      propertyPath: playerCopyPrefab
+      value: 
+      objectReference: {fileID: 7242947614161028885, guid: 88b92218f6ba5c94288021ec2e1a22dc,
+        type: 3}
     - target: {fileID: 1414755401121355510, guid: 74f6aa7f603c0d446a9d8943aba13b94,
         type: 3}
       propertyPath: hp
@@ -46896,7 +46907,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
