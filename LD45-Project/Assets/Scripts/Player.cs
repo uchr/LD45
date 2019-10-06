@@ -71,8 +71,8 @@ public class Player : MonoBehaviour {
             makingSomeMagick = true;
         }
         else {
-            if (GameObject.Find("@Tutorial").GetComponent<Tutorial>().stage == 2) {
-                GameObject.Find("@Tutorial").GetComponent<Tutorial>().ResetTimer();
+            if (GameObject.Find("@GameLogic").GetComponent<GameLogic>().tutorialStage == 2) {
+                GameObject.Find("@GameLogic").GetComponent<GameLogic>().ResetTimer();
             }
         }
 
@@ -87,8 +87,8 @@ public class Player : MonoBehaviour {
             makingSomeMagick = true;
         }
         else {
-            if (GameObject.Find("@Tutorial").GetComponent<Tutorial>().stage == 1) {
-                GameObject.Find("@Tutorial").GetComponent<Tutorial>().ResetTimer();
+            if (GameObject.Find("@GameLogic").GetComponent<GameLogic>().tutorialStage == 1) {
+                GameObject.Find("@GameLogic").GetComponent<GameLogic>().ResetTimer();
             }
         }
         if (Input.GetMouseButtonUp(1)) {
@@ -108,10 +108,10 @@ public class Player : MonoBehaviour {
                     Destroy(go);
                 }
             }
-            if (GameObject.Find("@Tutorial").GetComponent<Tutorial>().stage == 0) {
+            if (GameObject.Find("@GameLogic").GetComponent<GameLogic>().tutorialStage == 0) {
                 transform.position = new Vector3(-29.37f, 1.0f, -77.24f);
                 SpawnPlayerCopiesAround();
-                GameObject.Find("@Tutorial").GetComponent<Tutorial>().NextStage();
+                GameObject.Find("@GameLogic").GetComponent<GameLogic>().NextStage();
             }
             resurrectionMode = false;
             castEffect.transform.localPosition = 15 * Vector3.down;
