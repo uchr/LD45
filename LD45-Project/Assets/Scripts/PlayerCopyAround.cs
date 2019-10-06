@@ -23,12 +23,15 @@ public class PlayerCopyAround : MonoBehaviour {
     private GameObject player;
     private GameObject home;
 
+    private Animator cachedAnimatorController;
+
     private void Awake() {
         player = GameObject.Find("@Player");
         home = GameObject.Find("Home");
         cachedNavMeshAgent = GetComponent<NavMeshAgent>();
 
         relativePosition = transform.position - player.transform.position;
+        cachedAnimatorController = GetComponentInChildren<Animator>();
     }
 
     private void Update() {
@@ -68,7 +71,7 @@ public class PlayerCopyAround : MonoBehaviour {
                     Debug.DrawLine(transform.position, hit.position, Color.cyan);
                 }
 
-                if (Vector3.Distance(targetPositon, transform.position) < 1.0f) {
+                if (Vector3.Distance(targetPositon, transform.position) < 2.0f) {
                     --targetHouse.GetComponent<House>().hp;
                     //Destroy(gameObject);
                 }
@@ -80,7 +83,7 @@ public class PlayerCopyAround : MonoBehaviour {
 
         if (!targetFound) {
             NavMeshHit hit;
-            if (!NavMesh.SamplePosition(player.transform.position + relativePosition, out hit, 2.0f, NavMesh.AllAreas))
+            if (!NavMesh.SamplePosition(player.transform.position + relativePosition, out hit, 3.0f, NavMesh.AllAreas))
                 cachedNavMeshAgent.SetDestination(player.transform.position + relativePosition);
             else
                 cachedNavMeshAgent.SetDestination(hit.position);
@@ -94,6 +97,10 @@ public class PlayerCopyAround : MonoBehaviour {
             dir.y = 0.0f;
             inner.rotation = Quaternion.LookRotation(dir.normalized);
         }
+        if (cachedNavMeshAgent.velocity.magnitude > 0.2f)
+            cachedAnimatorController.SetFloat("Velocity", cachedNavMeshAgent.velocity.magnitude);
+        else
+            cachedAnimatorController.SetFloat("Velocity", 0.0f);
     }
 
     private void OnCollisionStay(Collision collision) {

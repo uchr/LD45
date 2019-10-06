@@ -6,6 +6,10 @@ public class GameLogic : MonoBehaviour {
     public int initHouses;
     public int currentHouses;
 
+    public UnityEngine.UI.Text text;
+
+    public bool isEnd = false;
+
     private void Awake() {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("House");
         initHouses = gameObjects.Length;
@@ -16,13 +20,21 @@ public class GameLogic : MonoBehaviour {
         if (currentHouses == 0) {
             Win();
         }
+
+        if (isEnd && Input.anyKeyDown) {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        }
     }
 
     public void Win() {
-        Debug.Log("Win");
+        text.gameObject.SetActive(true);
+        text.text = "Победа";
+        isEnd = true;
     }
 
     public void Lose() {
-        Debug.Log("Lose");
+        text.gameObject.SetActive(true);
+        text.text = "Поражение";
+        isEnd = true;
     }
 }

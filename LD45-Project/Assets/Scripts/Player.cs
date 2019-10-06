@@ -70,6 +70,12 @@ public class Player : MonoBehaviour {
             Attack(true);
             makingSomeMagick = true;
         }
+        else {
+            if (GameObject.Find("@Tutorial").GetComponent<Tutorial>().stage == 2) {
+                GameObject.Find("@Tutorial").GetComponent<Tutorial>().ResetTimer();
+            }
+        }
+
         if (Input.GetMouseButtonUp(0)) {
             Attack(false);
         }
@@ -78,6 +84,11 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButton(1)) {
             CircleCopies();
             makingSomeMagick = true;
+        }
+        else {
+            if (GameObject.Find("@Tutorial").GetComponent<Tutorial>().stage == 1) {
+                GameObject.Find("@Tutorial").GetComponent<Tutorial>().ResetTimer();
+            }
         }
         if (Input.GetMouseButtonUp(1))
             ReshuffleCopies();
@@ -93,6 +104,11 @@ public class Player : MonoBehaviour {
                     playerCopies.Add(Instantiate(playerCopyPrefab, go.transform.position, Quaternion.identity, GameObject.Find("@Characters").transform));
                     Destroy(go);
                 }
+            }
+            if (GameObject.Find("@Tutorial").GetComponent<Tutorial>().stage == 0) {
+                transform.position = new Vector3(-15, 0, -54);
+                SpawnPlayerCopiesAround();
+                GameObject.Find("@Tutorial").GetComponent<Tutorial>().NextStage();
             }
             resurrectionMode = false;
             castEffect.transform.localPosition = 15 * Vector3.down;
@@ -120,10 +136,19 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void SpawnPlayerCopiesAround() {
+    public void SpawnPlayerCopiesAround() {
+        foreach (var go in playerCopies) {
+            Destroy(go);
+        }
+        playerCopies.Clear();
+
         for (int i = 0; i < debugNumberOfCopies; ++i) {
             Vector3 randomPosition = Utils.RandomCirclePointOnNavMesh(hordeRadious, transform.position);
-            playerCopies.Add(Instantiate(playerCopyPrefab, transform.position + randomPosition, Quaternion.identity, GameObject.Find("@Characters").transform));
+            NavMeshHit hit;
+            if (!NavMesh.SamplePosition(transform.position + randomPosition, out hit, 2.0f, NavMesh.AllAreas))
+                playerCopies.Add(Instantiate(playerCopyPrefab, transform.position + randomPosition, Quaternion.identity, GameObject.Find("@Characters").transform));
+            else
+                playerCopies.Add(Instantiate(playerCopyPrefab, hit.position, Quaternion.identity, GameObject.Find("@Characters").transform));
         }
     }
 

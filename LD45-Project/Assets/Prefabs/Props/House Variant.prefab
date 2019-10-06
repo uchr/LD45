@@ -16,7 +16,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 6389102929643852551}
   enemyPrefab: {fileID: 6611672826791949813, guid: 2804f828d57afd943b2dc4b753c78405,
     type: 3}
-  spawnTime: 1
+  spawnTime: 2
 --- !u!1 &6389102929643852551
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6389102929643852551}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

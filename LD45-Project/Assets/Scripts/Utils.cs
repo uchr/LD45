@@ -34,7 +34,7 @@ public static class Utils {
         }
 
         if (currentTry == 10)
-            Debug.LogError("Too much tries");
+            Debug.Log("Too much tries");
 
         return randomPosition;
     }

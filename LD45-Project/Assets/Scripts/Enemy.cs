@@ -13,9 +13,11 @@ public class Enemy : MonoBehaviour {
     private float timer = -1.0f;
 
     private NavMeshAgent cachedNavMeshAgent;
+    private Animator cachedAnimatorController;
 
     private void Awake() {
         cachedNavMeshAgent = GetComponent<NavMeshAgent>();
+        cachedAnimatorController = GetComponentInChildren<Animator>();
     }
 
     private void Update() {
@@ -29,8 +31,13 @@ public class Enemy : MonoBehaviour {
         else
             cachedNavMeshAgent.isStopped = true;
 
-        if (cachedNavMeshAgent.velocity.magnitude > 0.01f)
+        if (cachedNavMeshAgent.velocity.magnitude > 0.01f) {
             inner.rotation = Quaternion.LookRotation(cachedNavMeshAgent.velocity.normalized);
+        }
+        if (cachedNavMeshAgent.velocity.magnitude > 0.2f)
+            cachedAnimatorController.SetFloat("Velocity", cachedNavMeshAgent.velocity.magnitude);
+        else
+            cachedAnimatorController.SetFloat("Velocity", 0.0f);
     }
 
     private void OnCollisionStay(Collision collision) {

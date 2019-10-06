@@ -19,6 +19,12 @@ public class TempUI : MonoBehaviour {
     private void Update() {
         housesText.text = "Houses: " + gameLogic.currentHouses + " from " + gameLogic.initHouses;
         hp.value = player.hpPercent;
-        resurrectionTime.value = player.resurrectionPercent;
+        if (player.resurrectionPercent > 0.01f) {
+            resurrectionTime.gameObject.SetActive(true);
+            resurrectionTime.value = player.resurrectionPercent;
+        }
+        else {
+            resurrectionTime.gameObject.SetActive(false);
+        }
     }
 }
