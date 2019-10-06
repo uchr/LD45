@@ -27,13 +27,13 @@ public static class Utils {
 
         int currentTry = 0;
         NavMeshHit hit;
-        while (!NavMesh.SamplePosition(position + randomPosition, out hit, 1.0f, NavMesh.AllAreas) && ++currentTry < 10) {
+        while (!NavMesh.SamplePosition(position + randomPosition, out hit, 2.0f, NavMesh.AllAreas) && ++currentTry < 3) {
             angle = Random.Range(0, 2.0f * Mathf.PI);
             randomRadious = Random.Range(0, raidous);
             randomPosition = new Vector3(randomRadious * Mathf.Cos(angle), 0.0f, randomRadious * Mathf.Sin(angle));
         }
 
-        if (currentTry == 10)
+        if (currentTry == 3)
             Debug.Log("Too much tries");
 
         return randomPosition;

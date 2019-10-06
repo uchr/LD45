@@ -195,7 +195,6 @@ public class Player : MonoBehaviour {
 
         playerCopies = liveCopies;
         for (int i = 0; i < playerCopies.Count; ++i) {
-            float angle = i * 2.0f * Mathf.PI / playerCopies.Count;
             playerCopies[i].GetComponent<PlayerCopyAround>().canAttack = attack;
         }
 
