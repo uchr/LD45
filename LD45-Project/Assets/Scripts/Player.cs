@@ -42,6 +42,12 @@ public class Player : MonoBehaviour {
 
     private List<GameObject> playerCopies = new List<GameObject>();
 
+    private Animator cachedAnimatorController;
+
+    private void Awake() {
+        cachedAnimatorController = GetComponentInChildren<Animator>();
+    }
+
     private void Update() {
         attackTimer -= Time.deltaTime;
         reshuffleTimer -= Time.deltaTime;
@@ -49,19 +55,22 @@ public class Player : MonoBehaviour {
         float speed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? fastSpeed : normalSpeed;
         Vector3 forward = new Vector3(0.5f, 0.0f, 0.5f);
         Vector3 right = new Vector3(0.5f, 0.0f, -0.5f);
-        if (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal")) > 0.01f) {
+        float velocity = Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"));
+        cachedAnimatorController.SetFloat("Velocity", velocity);
+        if (velocity > 0.01f) {
             Vector3 dir = (Input.GetAxis("Vertical") * forward + Input.GetAxis("Horizontal") * right).normalized;
             transform.position += dir * Time.deltaTime * speed;
+            inner.forward = dir;
         }
 
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(ray.origin, ray.direction * 100.0f, Color.red);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground"))) {
-            inner.forward = (hit.point - transform.position).normalized;
-            inner.forward = new Vector3(inner.forward.x, 0.0f, inner.forward.z);
-        }
-        
+        //RaycastHit hit;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Debug.DrawRay(ray.origin, ray.direction * 100.0f, Color.red);
+        //if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground"))) {
+        //    inner.forward = (hit.point - transform.position).normalized;
+        //    inner.forward = new Vector3(inner.forward.x, 0.0f, inner.forward.z);
+        //}
+
         if (Input.GetMouseButton(0) && attackTimer < 0.0f) {
             GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (var go in gameObjects) {
