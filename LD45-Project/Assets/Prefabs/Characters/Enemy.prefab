@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9a1f3bf67416543a7a11344c202259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravePrefab: {fileID: 5350094746179886330, guid: 7485d6139c42b17428276789da094b4c,
-    type: 3}
   inner: {fileID: 1841277202564533946}
   damage: 1
-  attackTime: 0.2
+  attackTime: 0.5
   agressionRange: 20
 --- !u!195 &6355410038191246534
 NavMeshAgent:
@@ -81,6 +79,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -43058218365806547, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
+        type: 3}
+      propertyPath: hp
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4560629803700965417, guid: 128a85f13c6f4ae41b22a07d7b3978fb,
         type: 3}

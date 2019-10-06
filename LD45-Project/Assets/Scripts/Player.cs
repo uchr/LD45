@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 public class Player : MonoBehaviour {
-    [Header("State")]
-    public int money = 0;
-
     [Header("Movement")]
     public Transform inner;
     public float normalSpeed = 10.0f;
@@ -29,12 +26,17 @@ public class Player : MonoBehaviour {
 
     [HideInInspector]
     public float resurrectionPercent = 0.0f;
+    [HideInInspector]
+    public float hpPercent = 0.0f;
 
     private List<GameObject> playerCopies = new List<GameObject>();
 
     private Animator cachedAnimatorController;
 
+    private int initHP = 0;
+
     private void Awake() {
+        initHP = GetComponent<CharachterState>().hp;
         cachedAnimatorController = GetComponentInChildren<Animator>();
     }
 
@@ -95,9 +97,11 @@ public class Player : MonoBehaviour {
             resurrectionMode = false;
             castEffect.transform.localPosition = 15 * Vector3.down;
             cachedAnimatorController.SetBool("Resurrection", false);
+            GetComponent<CharachterState>().hp = initHP;
             ReshuffleCopies();
         }
         resurrectionPercent = resurrectionMode ? resurrectionTimer / resurrectionTime : 0.0f;
+        hpPercent = (float) GetComponent<CharachterState>().hp / initHP;
 
         if (!makingSomeMagick) {
             float speed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? fastSpeed : normalSpeed;

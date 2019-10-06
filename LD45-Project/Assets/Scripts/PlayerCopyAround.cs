@@ -10,11 +10,9 @@ public class PlayerCopyAround : MonoBehaviour {
     public int damage = 1;
     public float attackTime = 1.0f;
     public float agressionRange = 10.0f;
-    public float moneyRange = 15.0f;
+    public float housesRange = 30.0f;
 
     public Vector3 relativePosition;
-
-    public bool hasMoney = false;
 
     private float timer = -1.0f;
 
@@ -37,7 +35,6 @@ public class PlayerCopyAround : MonoBehaviour {
         timer -= Time.deltaTime;
 
         bool targetFound= false;
-        bool disable = true;
         GameObject targetEnemy = Utils.ClosestObjectByTag("Enemy", player.transform.position, agressionRange);
         if (targetEnemy && canAttack) {
             cachedNavMeshAgent.SetDestination(targetEnemy.transform.position);
@@ -46,39 +43,48 @@ public class PlayerCopyAround : MonoBehaviour {
             debugState = "enemy";
         }
 
-        if (!targetFound && !hasMoney && !disable) {
-            GameObject targetMoney = Utils.ClosestObjectByTag("Money", transform.position, moneyRange);
-            if (targetMoney) {
-                cachedNavMeshAgent.SetDestination(targetMoney.transform.position);
-                Debug.DrawLine(transform.position, targetMoney.transform.position, Color.cyan);
+        if (!targetFound && canAttack) {
+            GameObject targetHouse = null;
 
-                if (Vector3.Distance(targetMoney.transform.position, transform.position) < 1.0f) {
-                    Destroy(targetMoney);
-                    hasMoney = true;
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("House");
+            float minDistance = float.PositiveInfinity;
+            foreach (var go in gameObjects) {
+                float distance = Vector3.Distance(go.GetComponent<House>().spawnPoint.transform.position, player.transform.position);
+                if (distance < minDistance && distance < housesRange && go.GetComponent<House>().hp > 0) {
+                    minDistance = distance;
+                    targetHouse = go;
                 }
-
-                targetFound = true;
-                debugState = "money";
             }
-        }
 
-        if (!targetFound && hasMoney && !disable) {
-            if (Vector3.Distance(home.transform.position, transform.position) < moneyRange) {
-                Debug.DrawLine(transform.position, home.transform.position, Color.cyan);
-                cachedNavMeshAgent.SetDestination(home.transform.position);
-                
-                if (Vector3.Distance(home.transform.position, transform.position) < 1.0f) {
-                    hasMoney = false;
-                    player.GetComponent<Player>().money += 100;
+            if (targetHouse) {
+                Vector3 targetPositon = targetHouse.GetComponent<House>().spawnPoint.transform.position;
+                NavMeshHit hit;
+                if (!NavMesh.SamplePosition(targetPositon, out hit, 2.0f, NavMesh.AllAreas)) {
+                    cachedNavMeshAgent.SetDestination(targetPositon);
+                    Debug.DrawLine(transform.position, targetPositon, Color.cyan);
+                }
+                else {
+                    cachedNavMeshAgent.SetDestination(hit.position);
+                    Debug.DrawLine(transform.position, hit.position, Color.cyan);
+                }
+
+                if (Vector3.Distance(targetPositon, transform.position) < 1.0f) {
+                    --targetHouse.GetComponent<House>().hp;
+                    //Destroy(gameObject);
                 }
 
                 targetFound = true;
-                debugState = "home";
+                debugState = "house";
             }
         }
 
         if (!targetFound) {
-            cachedNavMeshAgent.SetDestination(player.transform.position + relativePosition);
+            NavMeshHit hit;
+            if (!NavMesh.SamplePosition(player.transform.position + relativePosition, out hit, 2.0f, NavMesh.AllAreas))
+                cachedNavMeshAgent.SetDestination(player.transform.position + relativePosition);
+            else
+                cachedNavMeshAgent.SetDestination(hit.position);
+
             Debug.DrawLine(transform.position, player.transform.position + relativePosition, Color.cyan);
             debugState = "player";
         }

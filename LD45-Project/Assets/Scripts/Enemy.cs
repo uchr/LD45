@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
-    public GameObject gravePrefab;
     public Transform inner;
 
     public int damage = 2;
@@ -32,12 +31,6 @@ public class Enemy : MonoBehaviour {
 
         if (cachedNavMeshAgent.velocity.magnitude > 0.01f)
             inner.rotation = Quaternion.LookRotation(cachedNavMeshAgent.velocity.normalized);
-    }
-
-    public void SpawnGrave() {
-        Vector3 position = transform.position;
-        position.y = 0.0f;
-        Instantiate(gravePrefab, position, Quaternion.identity);
     }
 
     private void OnCollisionStay(Collision collision) {

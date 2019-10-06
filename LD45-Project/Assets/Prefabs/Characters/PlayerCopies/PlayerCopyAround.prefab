@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inner: {fileID: 2794757077254274138}
-  damage: 2
-  attackTime: 0.2
+  canAttack: 0
+  damage: 1
+  attackTime: 0.5
   agressionRange: 7.5
-  moneyRange: 15
+  housesRange: 20
   relativePosition: {x: 0, y: 0, z: 0}
-  hasMoney: 0
   debugState: 
 --- !u!1001 &3724072736877823684
 PrefabInstance:
@@ -46,6 +46,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659317481179619533, guid: c73c72a301166eb4b9d4589046a9e67c,
+        type: 3}
+      propertyPath: hp
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6280988858205405650, guid: c73c72a301166eb4b9d4589046a9e67c,
         type: 3}

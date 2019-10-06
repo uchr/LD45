@@ -6,13 +6,19 @@ using UI = UnityEngine.UI;
 public class TempUI : MonoBehaviour {
     public Player player;
 
-    public TMPro.TMP_Text playerHP;
-    public TMPro.TMP_Text playerMoney;
+    public TMPro.TMP_Text housesText;
+    public UI.Slider hp;
     public UI.Slider resurrectionTime;
 
+    private GameLogic gameLogic;
+
+    private void Awake() {
+        gameLogic = GameObject.Find("@GameLogic").GetComponent<GameLogic>();
+    }
+
     private void Update() {
-        playerHP.text = player.GetComponent<CharachterState>().hp.ToString();
-        playerMoney.text = player.money.ToString();
+        housesText.text = "Houses: " + gameLogic.currentHouses + " from " + gameLogic.initHouses;
+        hp.value = player.hpPercent;
         resurrectionTime.value = player.resurrectionPercent;
     }
 }

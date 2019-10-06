@@ -7,8 +7,8 @@ public class CharachterState : MonoBehaviour {
 
     private void Update() {
         if (hp < 0) {
-            if (GetComponent<Enemy>() != null) {
-                GetComponent<Enemy>().SpawnGrave();
+            if (GetComponent<Player>() != null) {
+                GameObject.Find("@GameLogic").GetComponent<GameLogic>().Lose();
             }
             Destroy(gameObject);
         }
